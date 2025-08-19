@@ -7,6 +7,7 @@ import UrlModule from './modules/URLS/url.module.js';
 
 export const APP_CONFIG = {
     prefix: '/api',
+    PORT: process.env.PORT || 3000,
     preMiddlewares:[
         express.json(),
         loggerMiddleware
