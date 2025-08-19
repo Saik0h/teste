@@ -1,0 +1,23 @@
+{
+  "name": "simple-people-manager",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Test application for managing a list of people with basic CRUD operations.",
+  "main": "src/server.js",
+  "author": "HSaiko",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  }
+}
