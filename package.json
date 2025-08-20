@@ -3,21 +3,24 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Test application for managing a list of people with basic CRUD operations.",
-  "main": "src/server.js",
+  "main": "src/main.js",
   "author": "HSaiko",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js"
   }
 }

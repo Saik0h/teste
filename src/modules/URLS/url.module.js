@@ -1,4 +1,4 @@
-import Module from "../../../_lib/Module_Initializer.js";
+import { Module } from '../../core/app/index.js'
 import UrlController from "./url.controller.js";
 
 const urlController = new UrlController();
@@ -6,7 +6,7 @@ const urlController = new UrlController();
 export const urlModuleConfig = {
   name: 'URLs',
   globalMiddlewares: [],
-  prefix: '/urls',           
+  prefix: '/urls',
   routes: [
     {
       method: 'POST',

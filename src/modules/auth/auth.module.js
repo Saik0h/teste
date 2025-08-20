@@ -1,4 +1,4 @@
-import Module from "../../../_lib/Module_Initializer.js";
+import { Module } from '../../core/app/index.js'
 import AuthController from "./auth.controller.js";
 
 const authController = new AuthController();
@@ -6,7 +6,7 @@ const authController = new AuthController();
 export const authModuleConfig = {
   name: 'Auth',
   globalMiddlewares: [],
-  prefix: '/auth',           
+  prefix: '/auth',
   routes: [
     {
       method: 'POST',
@@ -22,7 +22,7 @@ export const authModuleConfig = {
       method: 'POST',
       path: '/refresh',
       handler: authController.refresh,
-    },{
+    }, {
       method: 'POST',
       path: '/logout',
       handler: authController.logout,

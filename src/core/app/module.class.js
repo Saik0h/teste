@@ -6,10 +6,12 @@ export default class Module {
   constructor(config) {
     this.name = config.name || 'Module';
     this.router = config.router || Router();
-    this.globalMiddlewares = config.globalMiddlewares || [];
+    this.routeMiddlewares = config.routeMiddlewares || [];
     this.routes = config.routes || [];
     this.prefix = config.prefix || '';
-    
+    this.guards = config.guards || [];
+    this.interceptors = config.interceptors || [];
+
     this._setupRoutes();
   }
 
@@ -24,7 +26,7 @@ export default class Module {
       
       this.router[method.toLowerCase()](
         fullPath,
-        ...this.globalMiddlewares,
+        ...this.routeMiddlewares,
         ...middlewares,
         handler
       );
@@ -45,8 +47,8 @@ export default class Module {
 
         this.router[subMethod.toLowerCase()](
           subFullPath,
-          ...this.globalMiddlewares,
-          ...middlewares, 
+          ...this.routeMiddlewares,
+          ...middlewares,
           ...subMiddlewares,
           subHandler
         );

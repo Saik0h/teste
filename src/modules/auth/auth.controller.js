@@ -6,7 +6,6 @@ export default class AuthController {
     }
 
     register = (req, res) => {
-        console.log(req.user)
         return res.status(200).json(this.service.register(req.body));
     }
 
