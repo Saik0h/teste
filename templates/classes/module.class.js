@@ -1,30 +1,18 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-const VALID_METHODS = ["GET", "POST", "PUT", "DELETE", "PATCH"];
+const VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
 export default class Module {
   constructor(config) {
-    this.name = config.name || "Module";
-    this.controller = config.controller;
-    this.services = config.services || [];
+    this.name = config.name || 'Module';
     this.router = config.router || Router();
     this.routeMiddlewares = config.routeMiddlewares || [];
     this.routes = config.routes || [];
-    this.prefix = config.prefix || "";
+    this.prefix = config.prefix || '';
     this.guards = config.guards || [];
     this.interceptors = config.interceptors || [];
 
-    this.forInjection = new Map();
-    this._resolveDependencies()
-    this.resolveController()
     this._setupRoutes();
-  }
-
-  _resolveDependencies() {
-    this.services.forEach((service) => {
-      const key = service.toString().split(' ', 2)[1];
-      this.register(key, new service());
-    });
   }
 
   _setupRoutes() {
@@ -33,9 +21,9 @@ export default class Module {
       if (!VALID_METHODS.includes(method.toUpperCase())) {
         throw new Error(`Método HTTP inválido: ${method} na rota ${path}`);
       }
-
+      
       const fullPath = `${this.prefix}${path}`;
-
+      
       this.router[method.toLowerCase()](
         fullPath,
         ...this.routeMiddlewares,
@@ -52,9 +40,7 @@ export default class Module {
         } = sub;
 
         if (!VALID_METHODS.includes(subMethod.toUpperCase())) {
-          throw new Error(
-            `Método HTTP inválido: ${subMethod} na subrota ${subPath}`
-          );
+          throw new Error(`Método HTTP inválido: ${subMethod} na subrota ${subPath}`);
         }
 
         const subFullPath = `${fullPath}${subPath}`;
@@ -66,31 +52,8 @@ export default class Module {
           ...subMiddlewares,
           subHandler
         );
+
       }
     }
-  }
-
-  register(key, instance) {
-    this.forInjection.set(key, instance);
-  }
-
-  resolveController() {
-    const paramNames = this.getParamNames(this.controller);
-    const dependencies = paramNames.map((name) => {
-      const service = this.forInjection.get(name);
-      if (!service) throw new Error(`Service "${name}" not found`);
-      return service;
-    });
-    return new this.controller(...dependencies);
-  }
-
-  getParamNames(func) {
-    const str = func.toString();
-    const result = str.match(/constructor\s*\(([^)]*)\)/);
-    if (!result) return [];
-    return result[1]
-      .split(",")
-      .map((param) => param.trim())
-      .filter(Boolean);
   }
 }

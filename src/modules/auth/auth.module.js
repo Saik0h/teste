@@ -1,11 +1,14 @@
 import { Module } from '../../core/app/index.js'
 import AuthController from "./auth.controller.js";
+import AuthService from './auth.service.js';
 
 const authController = new AuthController();
 
 export const authModuleConfig = {
   name: 'Auth',
   globalMiddlewares: [],
+  controller: AuthController,
+  services: [AuthService],
   prefix: '/auth',
   routes: [
     {

@@ -1,10 +1,7 @@
-import UsersService from "./users.service.js";
 import updateUserDto from "./dto/updateUserDto.js";
 
 export default class UsersController {
-    constructor() {
-        this.service = new UsersService();
-    }
+    constructor(UsersService) { this.service = UsersService }
 
     getAllUsers = (req, res) => {
         return res.status(200).json(this.service.listUsers());

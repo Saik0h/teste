@@ -1,11 +1,12 @@
 import { Module } from '../../core/app/index.js'
-import UsuariosController from "./users.controller.js";
-
-const usersController = new UsuariosController();
-
+import UsersController from "./users.controller.js";
+import UsersService from './users.service.js';
+const usersController = new UsersController()
 export const usuariosConfig = {
   name: 'Usuarios',
   routeMiddlewares: [],
+  controller: UsersController,
+  services: [UsersService],
   prefix: '/usuarios',
   routes: [
     {

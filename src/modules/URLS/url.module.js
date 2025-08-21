@@ -1,11 +1,14 @@
 import { Module } from '../../core/app/index.js'
 import UrlController from "./url.controller.js";
+import UrlService from './url.service.js';
 
 const urlController = new UrlController();
 
 export const urlModuleConfig = {
   name: 'URLs',
   globalMiddlewares: [],
+  controller: UrlController,
+  services: [UrlService],
   prefix: '/urls',
   routes: [
     {
